@@ -5,23 +5,23 @@ class Program
     static void Main(string[] args)
     {
 
-        // RunQuestion1();
+        RunQuestion1();
 
-        // RunQuestion2();
+        RunQuestion2();
 
-        // RunQuestion3();
+        RunQuestion3();
 
-        // RunQuestion4();
+        RunQuestion4();
 
-        // RunQuestion5();
+        RunQuestion5();
 
-        // RunQuestion6();
+        RunQuestion6();
 
-        // RunQuestion7();
+        RunQuestion7();
 
-        // RunQuestion8();
+        RunQuestion8();
 
-        // RunQuestion9();
+        RunQuestion9();
 
         RunQuestion10();
 
