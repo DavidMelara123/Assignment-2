@@ -547,6 +547,18 @@ class Program
 
         Console.WriteLine("The risk score for the current client is: "+riskScore);
 
+        string classification = "";
+
+        if(riskScore < 30){
+            classification = "Low";
+        } else if(riskScore < 60) {
+            classification = "Moderate";
+        } else {
+            classification = "High";
+        }
+
+        Console.WriteLine("The risk for the current client is "+classification);
+
     }
 
 
