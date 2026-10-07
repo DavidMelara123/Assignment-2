@@ -19,9 +19,9 @@ class Program
 
         // RunQuestion7();
 
-        RunQuestion8();
+        // RunQuestion8();
 
-        // RunQuestion9();
+        RunQuestion9();
 
         // RunQuestion10();
 
@@ -604,29 +604,7 @@ class Program
     public static void RunQuestion9()
     {
         
-        int transactionAmounts = 0;
-
-        try {
-
-            Console.Write("Welcome! Please enter the total number of transaction amounts that will be entered: ");
-
-            transactionAmounts = Convert.ToInt32(Console.ReadLine() ?? "");
-
-            if(transactionAmounts < 0){
-                
-                Console.WriteLine("The amount of transactions entered cannot be negative");
-
-                return;
-
-            }
-
-        } catch(FormatException) {
-            
-            Console.WriteLine("The amount of transactions has to be a numeric input. Please make sure you are entering a numeric input. ");
-
-            return;
-
-        }
+        int transactionAmounts = convertToInt("transaction amounts");
 
         decimal [] arr = new decimal[transactionAmounts];
 
@@ -635,26 +613,9 @@ class Program
         while(transactionAmounts > 0)
         {
 
-            try {
+            decimal input = convertToDecimal("the transaction amount for transaction "+(arrIndex+1));
 
-                Console.Write("Please enter the transaction amount: ");
-            
-                decimal input = Convert.ToDecimal(Console.ReadLine() ?? "");
-
-                if(input < 0)
-                {
-                    Console.WriteLine("The transaction amount must be positive");
-                    continue;
-                }
-
-                arr[arrIndex++] = input;
-
-            } catch(Exception e){
-
-                Console.WriteLine("The input that was entered is non numeric. Please make sure that the input you entered is numeric. Error: "+e); 
-                continue;
-
-            }
+            arr[arrIndex++] = input;
 
             transactionAmounts--;
 
