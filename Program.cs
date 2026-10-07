@@ -5,25 +5,25 @@ class Program
     static void Main(string[] args)
     {
 
-        RunQuestion1();
+        // RunQuestion1();
 
         RunQuestion2();
 
-        RunQuestion3();
+        // RunQuestion3();
 
-        RunQuestion4();
+        // RunQuestion4();
 
-        RunQuestion5();
+        // RunQuestion5();
 
-        RunQuestion6();
+        // RunQuestion6();
 
-        RunQuestion7();
+        // RunQuestion7();
 
-        RunQuestion8();
+        // RunQuestion8();
 
-        RunQuestion9();
+        // RunQuestion9();
 
-        RunQuestion10();
+        // RunQuestion10();
 
     }
 
@@ -66,8 +66,7 @@ class Program
                 continue;
             } 
 
-        } catch(FormatException)
-        {
+        } catch(FormatException){
             Console.WriteLine(identifier+" should have a numeric data type. Please enter a numeric data type");
         } catch(OverflowException){
             Console.WriteLine("Please make sure that your variables fit within the allowed range for a decimal");
@@ -103,21 +102,20 @@ class Program
         Console.WriteLine("----------------------------------------");
         Console.WriteLine("Beginning of Question 2: ");
         double percentageRate = 0.00;
-        try {
-    
-            Console.Write("Please enter an annual return rate as a percentage in order to know how much time in years it will take for the original investment to double: ");
-            percentageRate = Convert.ToDouble(Console.ReadLine());
-        } catch(FormatException){
-            Console.WriteLine("The percentage rate must be numeric. Please make sure you entered the correct data type.");
-            return;
-        } catch (OverflowException){
-            Console.WriteLine("One or more of the input values was outside the allowable range.");
-        }
 
-        if(percentageRate <= 0)
-        {
-            Console.WriteLine("Please enter a valid percentage rate. A negative percentage rate is not allowed");
-            return;
+        Console.Write("Please enter an annual return rate as a percentage in order to know how much time in years it will take for the original investment to double: ");
+
+        while(percentageRate <= 0.00) {
+            try {
+                percentageRate = Convert.ToDouble(Console.ReadLine());
+                 if(percentageRate <= 0){
+                    Console.WriteLine("\nA percentage rate less than or equal to 0 is not allowed. Please try again. ");
+                 }
+            } catch(FormatException){
+                Console.WriteLine("\nThe percentage rate must be numeric. Please try again with the correct data type. ");
+            } catch (OverflowException){
+                Console.WriteLine("One or more of the input values was outside the allowable range.");
+            }
         }
         double result = calculate_time_double_investment(percentageRate);
         Console.WriteLine("Specifically, the time it will take for the investment to double is "+result+" years");
@@ -138,7 +136,7 @@ class Program
         {
             speed = "slow";
         }
-        Console.WriteLine("The investment will double at a "+speed+" speed");
+        Console.WriteLine("\nThe investment will double to its initial amount at a "+speed+" speed");
         return result;
     }
 
