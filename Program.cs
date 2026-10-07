@@ -9,9 +9,9 @@ class Program
 
         // RunQuestion2();
 
-        RunQuestion3();
+        // RunQuestion3();
 
-        // RunQuestion4();
+        RunQuestion4();
 
         // RunQuestion5();
 
@@ -143,48 +143,6 @@ class Program
     // End of question 2 logic
     
     // Start of Question 3 Logic
-
-
-    /*
-    public static void RunQuestion3()
-    {
-    
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 3: ");
-        Console.WriteLine("Welcome! In order to calculate the area of the triangle region, you will need to provide side lengths a, b, and c one at a time");
-    
-        double a = 0, b = 0, c = 0;
-        try {
-    
-            Console.Write("Please enter side length of a: ");
-            a = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Now, please enter side length of b: ");
-            b = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Finally, please provide the side length of c: ");
-            c = Convert.ToDouble(Console.ReadLine());
-        } catch(FormatException){
-            Console.WriteLine("One or more of the input side lengths provided by the user are non numeric. Please make sure that the sides lengths are all numeric. ");
-            return;
-        } catch (OverflowException){
-            Console.WriteLine("One or more of the input values was outside the allowable range.");
-        }
-        if(a <= 0 || b <= 0 || c <= 0)
-        {
-            Console.WriteLine("All side lengths of the triangle must be greater than 0 for it to be a valid triangle");
-            return;
-        }
-        double areaOfTriangle = 0.00;
-        if(c >= a + b || b >= a + c || a >= b + c)
-        {
-            Console.WriteLine("The input side lengths do not make up a valid triangle. For a triangle to be valid, the sum of any two side lengths of a triangle must be greater than the remain side length of the same triangle.");
-        } else
-        {
-            areaOfTriangle = calculateTriangleArea(a,b,c);
-            Console.WriteLine("The area of the triangle is "+areaOfTriangle);
-        }
-    }
-
-    */
 
     public static void RunQuestion3(){
         
