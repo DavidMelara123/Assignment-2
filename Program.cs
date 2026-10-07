@@ -646,6 +646,7 @@ class Program
         int countAbove = calculateCountAbove(average, sales);
 
         string identifier = "sale";
+        
 
         displayResults(smallest, largest, totalSales, average, identifier);
 
