@@ -11,11 +11,11 @@ class Program
 
         // RunQuestion3();
 
-        RunQuestion4();
+        // RunQuestion4();
 
         // RunQuestion5();
 
-        // RunQuestion6();
+        RunQuestion6();
 
         // RunQuestion7();
 
@@ -51,23 +51,23 @@ class Program
 
       decimal variable = -1.00m;
 
+      Console.WriteLine("Please enter the "+identifier+" ");
+
       while(variable < 0) {
 
         try
         {
             
-            Console.WriteLine("Please enter the "+identifier+" ");
-
             variable = Convert.ToDecimal(Console.ReadLine() ?? "");
 
             if(variable < 0)
             {
-                Console.WriteLine(identifier+" cannot be negative. Please enter a non negative decimal");
+                Console.WriteLine(identifier+" cannot be negative. Please try again: ");
                 continue;
             } 
 
         } catch(FormatException){
-            Console.WriteLine(identifier+" should have a numeric data type. Please enter a numeric data type");
+            Console.WriteLine(identifier+" should have a decimal data type. Please try again: ");
         } catch(OverflowException){
             Console.WriteLine("Please make sure that your variables fit within the allowed range for a decimal");
         }
@@ -372,29 +372,40 @@ class Program
         Console.WriteLine("The total amount collected after "+numberOfSales+" total sales is "+totalSalesAmount+", and the average amount per sale is "+averageAmountPerSale);
     }
 
-    public static void RunQuestion6()
-    {
+    public static void RunQuestion6(){
+        
         Console.WriteLine("----------------------------------------");
         Console.WriteLine("Beginning of Question 6: ");
-        decimal initialInvestment = 0.00m;
-        decimal monthlyBenefit = 0.00m;
-        try {
-          
-            Console.Write("Please enter your initial investment: ");
-            initialInvestment = Convert.ToDecimal(Console.ReadLine());
-            Console.Write("Thanks. Now please enter the monthly benefit: ");
-            monthlyBenefit = Convert.ToDecimal(Console.ReadLine());
-            if(initialInvestment <= 0 || monthlyBenefit <= 0)
-            {
-                Console.WriteLine("Both the initial investment and the monthly benefit must be greater than 0");
-                return;
-            }
-            recoup(initialInvestment, monthlyBenefit);
-        } catch(FormatException){
-            Console.Write("Both the initial investment or the expected monthly benefit must be numeric. ");
-        }   
+        decimal initialInvestment = convertToDecimal("initial investment");
+        decimal monthlyBenefit = convertToDecimal("monthly benefit");
+
+        recoup(initialInvestment, monthlyBenefit);
 
     }
+
+    // public static void RunQuestion6()
+    // {
+    //     Console.WriteLine("----------------------------------------");
+    //     Console.WriteLine("Beginning of Question 6: ");
+    //     decimal initialInvestment = 0.00m;
+    //     decimal monthlyBenefit = 0.00m;
+    //     try {
+          
+    //         Console.Write("Please enter your initial investment: ");
+    //         initialInvestment = Convert.ToDecimal(Console.ReadLine());
+    //         Console.Write("Thanks. Now please enter the monthly benefit: ");
+    //         monthlyBenefit = Convert.ToDecimal(Console.ReadLine());
+    //         if(initialInvestment <= 0 || monthlyBenefit <= 0)
+    //         {
+    //             Console.WriteLine("Both the initial investment and the monthly benefit must be greater than 0");
+    //             return;
+    //         }
+    //         recoup(initialInvestment, monthlyBenefit);
+    //     } catch(FormatException){
+    //         Console.Write("Both the initial investment or the expected monthly benefit must be numeric. ");
+    //     }   
+
+    // }
 
     public static void recoup(decimal initialInvestment, decimal monthlyBenefit)
     {
