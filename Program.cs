@@ -561,66 +561,6 @@ class Program
 
     }
 
-
-    /*
-    public static void RunQuestion8()
-    {
-
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 8 ");
-        Console.WriteLine("Welcome. In order to assign a customer risk score method for a customer, you will need to enter different quantities. ");    
-        
-        int missedPayments = 0, supportTickets = 0, monthsInactive = 0;
-
-        try {
-
-            Console.Write("First, please enter the missed number of payments for the current client: ");
-
-            missedPayments = Convert.ToInt32(Console.ReadLine() ?? "");
-
-            Console.Write("Great. Now, please enter the amount of support tickets the client has requested: ");
-
-            supportTickets = Convert.ToInt32(Console.ReadLine() ?? "");
-
-            Console.Write("Finally, please enter the number of inactive months for the current client: ");
-
-            monthsInactive = Convert.ToInt32(Console.ReadLine() ?? "");
-
-            if(missedPayments < 0 || supportTickets < 0 || monthsInactive < 0)
-            {
-                Console.WriteLine("Please make sure that all the three quantities are greater than or equal to 0");
-                return;
-            }
-
-            int riskScore = ComputeRiskScore(missedPayments, supportTickets, monthsInactive);
-
-            Console.WriteLine("The risk score for the current client is "+riskScore);
-
-            string classification = "";
-
-            if(riskScore < 30)
-            {
-                classification = "Low";
-            } else if(riskScore < 60)
-            {
-                classification = "Moderate";
-            } else
-            {
-                classification = "High";
-            }
-
-            Console.WriteLine("The risk for the current client is "+classification);
-
-        } catch(FormatException){
-            
-            Console.WriteLine("At least one of the required entries is not a string. Please make sure to enter only numeric quantities. ");
-
-        }
-
-    }
-
-    */
-
     public static int convertToInt(string label){
         
         int variable = -1;
