@@ -649,6 +649,52 @@ class Program
 
     }
 
+    /*
+
+        Please note that I did this in question 9
+
+        decimal minimum = calculateMin(arr);
+
+        decimal maximum = calculateMax(arr);
+
+        decimal total = calculateTotal(arr);
+
+        decimal average = calculateAverage(total, length);
+
+        because it is a requirement. It is a good idea to have reusable functions
+        to avoid repeating code. However, since questions 9 and 10 ask for 
+        min, max, average, and total, I thought a better way (to do it in just one
+        for loop) is to add a method that does all that.
+        
+        That is what my calculateSummaryStatistics
+        method does. However, it was a requirement to create individual methods
+        for each. It is not a wrong approach. In fact, both serve different purposes.
+        And neither approach is better than the other. It just really depends on
+        the task at hand. If you are going to have multiple situations in which 
+        you need min, max, average, and total, it can be a good idea to go a method
+        such as the one I did called "calculateSummaryStatistics." But if you
+        are going to have many functions, some that ask for only the min, some that
+        only ask for the max, some that ask for only the average, it might be better
+        to have a reusable methods for each. In practice, if we need both situations,
+        we might keep both the individual methods and the single cohesive method.
+        In practice, I still called the individual methods because it was a requirement.
+        It is not a big deal anyways because it is still just 4 passes, but the other
+        method I made can do it in 1 pass. So it really depends on the task as I said.
+        For this task, it could have been great to call the calculate summary statistics
+        method I did, but i did not do it because the requirement was to make and
+        call individual methods, which is still fine. That is not wrong either. In 
+        fact, as I said, neither method is better than the other. It just depends on
+        the task at hand and what you want to optimize. For most tasks, having individual
+        methods is preferred due to separation of concerns. I just thought I would mention
+        this though. I am aware of the tradeoffs of both methods, but ultimately i think
+        for most every day purposes having individual functions for each one of them
+        is better. If we are going to need all 4 measures in multiple questions, though,
+        it could be good to also add the calculateSummaryStatistics method that does
+        it all in one pass and then call that. 
+
+
+    */
+
     public static void RunQuestion10(){
         
         Console.WriteLine("----------------------------------------");
