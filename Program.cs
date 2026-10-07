@@ -28,30 +28,83 @@ class Program
     }
 
     // Start of Question 1 Logic 
+
     public static void RunQuestion1()
     {
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 1: ");
-        int customers = 0;
-        decimal monthlyPrice = 0.00m, percentageIncrease = 0.00m;
-        try {
-            Console.Write("Please enter the current number of customers: ");
-            customers = Convert.ToInt32(Console.ReadLine() ?? "");
-            Console.Write("Please enter the current monthly price per customer subscription: ");
-            monthlyPrice = Convert.ToDecimal(Console.ReadLine() ?? "");
-            Console.Write("Please enter the percentage price increase for the monthly subscription: ");
-            percentageIncrease = Convert.ToDecimal(Console.ReadLine() ?? "");
-            if(customers < 0 || monthlyPrice < 0 || percentageIncrease < 0){
-                Console.WriteLine("One of the entered quantities is negative. All of the quantities provided by the user must be greater than or equal to 0");
-                return;
+        
+        Console.WriteLine("-----------------------");
+        Console.WriteLine("Beginning of Question 1");
+
+        int customers = -1;
+
+        decimal monthlyPrice = -1.00m, percentageIncrease = -1.00m;
+
+        while(customers < 0)
+            {
+                
+                try{
+
+                    Console.Write("Please enter the number of customers: ");
+
+                    customers = Convert.ToInt32(Console.ReadLine() ?? "");
+
+                    if(customers < 0) {
+                        Console.WriteLine("Customers should not be negative. Please try again.");
+                    }
+                    
+                } catch(FormatException)
+                {
+                    Console.WriteLine("The number of customers has to be an integer. Please make sure that you enter an integer");
+                }
+
             }
+
+            while(monthlyPrice < 0) {
+
+                try {
+
+                    Console.Write("Please enter the monthly price per customer: ");
+
+                    monthlyPrice = Convert.ToDecimal(Console.ReadLine() ?? "");
+                    
+                    if(monthlyPrice < 0) {
+                        Console.WriteLine("The Monthly Price should not be negative. Please try again!");
+                    }
+
+                } catch(FormatException) {
+
+                    Console.WriteLine("The monthly price must have a decimal data type. Please make sure to enter a valid decimal");
+
+                }
+
+            }
+
+            while(percentageIncrease < 0) {
+
+                try {
+
+                    Console.Write("Please enter the percentage increase: ");
+
+                    percentageIncrease = Convert.ToDecimal(Console.ReadLine() ?? "");
+
+                    if(percentageIncrease < 0) {
+                        Console.WriteLine("The percentage increase cannot be negative. Please try again");
+                    }
+                
+                } catch(FormatException) {
+
+                    Console.WriteLine("The percentage increase has to have a decimal data type. Please make sure to enter a valid decimal");
+
+                }
+
+
+            }
+
             print_subscription_revenue(customers, monthlyPrice, percentageIncrease);
-        } catch (FormatException){
-            Console.WriteLine("One or more of the input values was not numeric. Please enter numeric values.");
-        } catch (OverflowException){
-            Console.WriteLine("One or more of the input values was outside the allowable range.");
+            
         }
-    }
+
+
     public static void print_subscription_revenue(int customers, decimal monthlyPrice, decimal percentageIncrease)
     {
         decimal totalMonthlyRevenue = customers * monthlyPrice;
