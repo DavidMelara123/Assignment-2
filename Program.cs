@@ -35,77 +35,52 @@ class Program
         Console.WriteLine("-----------------------");
         Console.WriteLine("Beginning of Question 1");
 
-        int customers = -1;
+        decimal customers = convertToDecimal("Number of customers");
 
-        decimal monthlyPrice = -1.00m, percentageIncrease = -1.00m;
+        decimal monthlyPrice = convertToDecimal("Monthly Price");
 
-        while(customers < 0)
-            {
-                
-                try{
+        decimal percentageIncrease = convertToDecimal("Percentage Increase");
 
-                    Console.Write("Please enter the number of customers: ");
-
-                    customers = Convert.ToInt32(Console.ReadLine() ?? "");
-
-                    if(customers < 0) {
-                        Console.WriteLine("Customers should not be negative. Please try again.");
-                    }
-                    
-                } catch(FormatException)
-                {
-                    Console.WriteLine("The number of customers has to be an integer. Please make sure that you enter an integer");
-                }
-
-            }
-
-            while(monthlyPrice < 0) {
-
-                try {
-
-                    Console.Write("Please enter the monthly price per customer: ");
-
-                    monthlyPrice = Convert.ToDecimal(Console.ReadLine() ?? "");
-                    
-                    if(monthlyPrice < 0) {
-                        Console.WriteLine("The Monthly Price should not be negative. Please try again!");
-                    }
-
-                } catch(FormatException) {
-
-                    Console.WriteLine("The monthly price must have a decimal data type. Please make sure to enter a valid decimal");
-
-                }
-
-            }
-
-            while(percentageIncrease < 0) {
-
-                try {
-
-                    Console.Write("Please enter the percentage increase: ");
-
-                    percentageIncrease = Convert.ToDecimal(Console.ReadLine() ?? "");
-
-                    if(percentageIncrease < 0) {
-                        Console.WriteLine("The percentage increase cannot be negative. Please try again");
-                    }
-                
-                } catch(FormatException) {
-
-                    Console.WriteLine("The percentage increase has to have a decimal data type. Please make sure to enter a valid decimal");
-
-                }
-
-
-            }
-
-            print_subscription_revenue(customers, monthlyPrice, percentageIncrease);
+        print_subscription_revenue(customers, monthlyPrice, percentageIncrease);
             
+    }
+
+    
+    public static decimal convertToDecimal(string identifier)
+    {
+
+      decimal variable = -1.00m;
+
+      while(variable < 0) {
+
+        try
+        {
+            
+            Console.WriteLine("Please enter the "+identifier+" ");
+
+            variable = Convert.ToDecimal(Console.ReadLine() ?? "");
+
+            if(variable < 0)
+            {
+                Console.WriteLine(identifier+" cannot be negative. Please enter a non negative decimal");
+                continue;
+            } 
+
+        } catch(FormatException)
+        {
+            Console.WriteLine(identifier+" should have a numeric data type. Please enter a numeric data type");
+        } catch(OverflowException){
+            Console.WriteLine("Please make sure that your variables fit within the allowed range for a decimal");
         }
 
+      }
 
-    public static void print_subscription_revenue(int customers, decimal monthlyPrice, decimal percentageIncrease)
+      return variable;
+
+    }
+
+
+    public static void print_subscription_revenue(decimal customers, decimal monthlyPrice, decimal percentageIncrease)
     {
         decimal totalMonthlyRevenue = customers * monthlyPrice;
         decimal rateIncrease = 1.00m + (percentageIncrease / 100.00m);
