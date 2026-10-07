@@ -222,21 +222,30 @@ class Program
         Console.WriteLine("----------------------------------------");
         Console.WriteLine("Beginning of Question 4: ");
         Console.WriteLine("Please enter the number of compute hours used: ");
-        try
-        {
-            double numberOfHours = Convert.ToDouble(Console.ReadLine() ?? "");
-            if(numberOfHours < 0)
+
+        double numberOfHours = -1.00; // invalid, as a way for the program to know when to continue and when to stop
+
+        while(numberOfHours < 0) {
+            try
             {
-                Console.WriteLine("Number of Hours must be non negative");
-                return;
+                numberOfHours = Convert.ToDouble(Console.ReadLine() ?? "");
+                if(numberOfHours < 0)
+                {
+                    Console.WriteLine("The number of compute hours must be non negative. Please try again: ");
+                }
+            } catch(FormatException) {
+                Console.WriteLine("The number of compute hours must be a numeric input. Please try again: ");
+            } catch(OverflowException)
+            {
+                Console.WriteLine("Please make sure that the number of hours fits within the range of the double data type: [0,"+Double.MaxValue+"]. Please try again: ");
             }
-            decimal total_invoice = CalculateAndDisplayInvoice(numberOfHours);
-            Console.WriteLine("The total invoice is: "+total_invoice);
-        } catch(FormatException) {
-        
-            Console.WriteLine("The number of compute hours must be a numeric input. Please make sure to add a numeric input. ");
-            return;
+
         }
+
+        decimal total_invoice = CalculateAndDisplayInvoice(numberOfHours);
+        Console.WriteLine("The total invoice is: "+total_invoice);
+
+
     } 
 
     public static decimal CalculateAndDisplayInvoice(double hours){
@@ -263,9 +272,17 @@ class Program
         return totalInvoice;
 }
 
+/*
 
-    public static decimal calculateComputerCharges(double hours)
-    {
+   The version below this comment is the first version I created, but i was not really convinced, so I wrote
+   the version where I make use of Math.Max and Math.Min to make a one liner (which I think is a lot more
+   elegant). That said, since the requirement was to add if else if and else statements, I did another solution, but I think
+   my one liner is better than the one that uses if else if and else statements. It is just tht the requirement
+   was to make a solution that uses if else if and else statements.
+
+*/
+
+    public static decimal calculateComputerCharges(double hours){
 
         decimal charges = 0.00m;
 
@@ -297,7 +314,9 @@ class Program
         
     }
 
-    public static decimal calculateComputerChargesAgain(double hours)
+    // most efficient solution I was able to come up with for question 4.
+
+    public static decimal calculateComputerChargesElegantly(double hours)
     {
 
         double upperThreshold = 500;
