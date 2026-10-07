@@ -7,9 +7,9 @@ class Program
 
         // RunQuestion1();
 
-        RunQuestion2();
+        // RunQuestion2();
 
-        // RunQuestion3();
+        RunQuestion3();
 
         // RunQuestion4();
 
@@ -144,6 +144,8 @@ class Program
     
     // Start of Question 3 Logic
 
+
+    /*
     public static void RunQuestion3()
     {
     
@@ -182,7 +184,73 @@ class Program
         }
     }
 
+    */
+
+    public static void RunQuestion3(){
+        
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("Beginning of Question 3: ");
+        Console.WriteLine("Welcome! In order to calculate the area of the triangle region, you will need to provide side lengths a, b, and c one at a time");
+    
+        double areaOfTriangle = -1.00; // invalid and impossible result, so -1 as placeholder
+
+        while(areaOfTriangle == -1.00) {
+
+            double a = obtainSideLength("a");
+
+            double b = obtainSideLength("b");
+
+            double c = obtainSideLength("c");
+
+            areaOfTriangle = calculateTriangleArea(a,b,c);
+
+        }
+
+
+        Console.WriteLine("\nThe area of the triangle is: "+areaOfTriangle);
+
+    }
+
+    public static double obtainSideLength(string identifier)
+    {
+
+        double sideLength = 0.00;
+
+        Console.Write("\nPlease enter side length for side "+identifier+": ");
+
+        while(sideLength <= 0.00) {
+        
+            try {
+
+                sideLength = Convert.ToDouble(Console.ReadLine() ?? "");
+
+                if(sideLength <= 0.00)
+                {
+                    Console.WriteLine("\nEach side length of any valid triangle must be greater than 0. Please try again for side length "+identifier+": ");
+                }
+
+            } catch(FormatException) {
+                
+                Console.WriteLine("\nThe data type of the entered side length must be double. Please try again for side length "+identifier+": ");
+
+            } catch(OverflowException) {
+                
+                Console.WriteLine("\nPlease make sure that the side length that you entered fits within the range [0,"+Double.MaxValue+"] in order to prevent overflow. Please try again: ");
+
+            }
+
+        }
+        
+        return sideLength;
+
+    }
+
     public static double calculateTriangleArea(double a, double b, double c){
+        if(a >= b + c || b >= a + c || c >= a + b)
+        {
+            Console.WriteLine("\nPlease make sure that you enter valid side lengths for your triangle. A triangle must follow the triangle inequality theorem. Any two side lengths of a triangle must add up to strictly more than the remaining side of the same triangle. ");
+            return -1.00; // invalid area to communicate to the while loop for the user to try again
+        }
         double semiPerimeter = (a + b + c) / 2.0;
         double areaOfTriangle = Math.Sqrt(semiPerimeter * (semiPerimeter-a) * (semiPerimeter - b) * (semiPerimeter - c));
         return areaOfTriangle;
