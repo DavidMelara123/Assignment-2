@@ -647,7 +647,6 @@ class Program
 
         string identifier = "sale";
         
-
         displayResults(smallest, largest, totalSales, average, identifier);
 
         displayCountAbove(countAbove, average);
