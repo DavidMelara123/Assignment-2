@@ -15,11 +15,11 @@ class Program
 
         // RunQuestion5();
 
-        RunQuestion6();
+        // RunQuestion6();
 
         // RunQuestion7();
 
-        // RunQuestion8();
+        RunQuestion8();
 
         // RunQuestion9();
 
@@ -530,6 +530,27 @@ class Program
     }
 }
 
+
+    public static void RunQuestion8(){
+        
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("Beginning of Question 8 ");
+        Console.WriteLine("Welcome. In order to assign a customer risk score method for a customer, you will need to enter different quantities. ");    
+        
+        int missedPayments = convertToInt("missed payments");
+
+        int supportTickets = convertToInt("support tickets");
+
+        int monthsInactive = convertToInt("months inactive");
+
+        int riskScore = ComputeRiskScore(missedPayments, supportTickets, monthsInactive);
+
+        Console.WriteLine("The risk score for the current client is: "+riskScore);
+
+    }
+
+
+    /*
     public static void RunQuestion8()
     {
 
@@ -583,6 +604,42 @@ class Program
             Console.WriteLine("At least one of the required entries is not a string. Please make sure to enter only numeric quantities. ");
 
         }
+
+    }
+
+    */
+
+    public static int convertToInt(string label){
+        
+        int variable = -1;
+
+        Console.Write("Please enter the "+label+": ");
+
+        while(variable < 0){
+
+            try {
+            
+                variable = Convert.ToInt32(Console.ReadLine() ?? "");
+
+                if(variable < 0)
+                {
+                    Console.WriteLine("Please make sure that the integer you entered for "+label+" is not negative. Please try again: ");
+                }
+
+            } catch(FormatException){
+
+                Console.WriteLine("Please make sure that you entered an integer for "+label+". Please try again: ");
+                
+            } catch(OverflowException){
+                
+                Console.WriteLine("Please make sure that the integer you entered is in the range [0,"+Int32.MaxValue+"]. Please try again: ");
+
+            }
+
+
+        }
+
+        return variable;
 
     }
 
