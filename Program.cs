@@ -699,8 +699,8 @@ class Program
         int countAbove = calculateCountAbove(average, sales); 
         
         /* my function calculateSummaryStatistics would be ideal to further reduce code, but we were asked to have a method for each separately and to call each on this function, 
-        which is a good suggestion for 95% of scenarios due to separation of concerns. Since we require the same 4-5 pieces of info for more than one questions though, it can be 
-        a good idea to call the method calculateSummaryStatistics instead to have one line and to do it in one loop.*/
+        which is a good suggestion for 99% of scenarios due to separation of concerns. Since we require the same 4-5 pieces of info for more than one questions though, we may consider
+        that it could be a good idea to call the method calculateSummaryStatistics instead to have one line and to do it in one loop instead of 5 calls and 5 linear time complexity loops*/
 
         string identifier = "sale", classification = "";
         
