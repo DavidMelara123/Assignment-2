@@ -19,8 +19,6 @@ class Program
         only one c sharp file.
     */
 
-    public static string closingMessage = "You have decided to finish the program early";
-
     public static string reaskForInput = "Please try again. Otherwise, if you intend to stop running the program, press -1:";
 
     public static string programMin = "0";
@@ -71,7 +69,7 @@ class Program
 
         if(customers == -1)
         {
-            Console.WriteLine(closingMessage);
+            displayClosingMsg();
             return;
         }
 
@@ -79,15 +77,15 @@ class Program
 
         if(monthlyPrice == -1)
         {
-            Console.WriteLine(closingMessage);
+            displayClosingMsg();
             return;
         }
 
         decimal percentageIncrease = convertToDecimal("Percentage Increase");
 
-        if(monthlyPrice == -1)
+        if(percentageIncrease == -1)
         {
-            Console.WriteLine(closingMessage);
+            displayClosingMsg();
             return;
         }
 
@@ -122,7 +120,7 @@ class Program
 
         if(percentageRate == -1.00)
         {
-            Console.WriteLine("You have chosen to end the program");
+            displayClosingMsg();
             return;
         }
 
@@ -166,7 +164,7 @@ class Program
 
             if(a == -1)
             {
-                Console.WriteLine(closingMessage);
+                displayClosingMsg();
                 return;
             }
 
@@ -174,7 +172,7 @@ class Program
 
             if(b == -1)
             {
-                Console.WriteLine(closingMessage);
+                displayClosingMsg();
                 return;
             }
 
@@ -182,7 +180,7 @@ class Program
 
             if(c == -1)
             {
-                Console.WriteLine(closingMessage);
+                displayClosingMsg();
                 return;
             }
 
@@ -217,7 +215,8 @@ class Program
         double numberOfHours = convertToDouble("number of hours");
 
         if(numberOfHours == -1){
-            Console.WriteLine("You have chosen to end the program");
+            displayClosingMsg();
+            return;
         }
 
         decimal total_invoice = CalculateAndDisplayInvoice(numberOfHours);
@@ -235,11 +234,11 @@ class Program
         }
         else if (hours > 100)
         {
-        usageCharge = (100 * 0.12m) + (Convert.ToDecimal(hours - 100) * 0.09m);
+            usageCharge = (100 * 0.12m) + (Convert.ToDecimal(hours - 100) * 0.09m);
         }
         else
         {
-        usageCharge = Convert.ToDecimal(hours) * 0.12m;
+            usageCharge = Convert.ToDecimal(hours) * 0.12m;
         }
 
         usageCharge = Math.Round(usageCharge, 2);
@@ -347,7 +346,7 @@ class Program
 
         if(initialInvestment == -1)
         {
-            Console.WriteLine(closingMessage);
+            displayClosingMsg();
             return;
         }
 
@@ -355,7 +354,7 @@ class Program
 
         if(monthlyBenefit == -1)
         {
-            Console.WriteLine(closingMessage);
+            displayClosingMsg();
             return;
         }
 
@@ -509,9 +508,27 @@ class Program
         
         int missedPayments = convertToInt("missed payments");
 
+        if(missedPayments == -1)
+        {
+            displayClosingMsg();
+            return;
+        }
+
         int supportTickets = convertToInt("support tickets");
 
+         if(supportTickets == -1)
+        {
+            displayClosingMsg();
+            return;
+        }
+
         int monthsInactive = convertToInt("months inactive");
+
+         if(monthsInactive == -1)
+        {
+            displayClosingMsg();
+            return;
+        }
 
         int riskScore = ComputeRiskScore(missedPayments, supportTickets, monthsInactive);
 
@@ -978,6 +995,12 @@ class Program
         
     }
     
+    public static void displayClosingMsg()
+    {
+        
+        Console.WriteLine("You have decided to finish the program early");
+
+    }
     
     
 
