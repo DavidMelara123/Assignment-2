@@ -65,10 +65,9 @@ class Program
     public static void RunQuestion1()
     {
         
-        Console.WriteLine("-----------------------");
-        Console.WriteLine("Beginning of Question 1");
+        displayInitialMsg(1);
 
-        decimal customers = convertToInt("Number of customers");
+        decimal customers = convertToInt("the number of customers");
 
         if(customers == -1)
         {
@@ -116,8 +115,7 @@ class Program
 
     public static void RunQuestion2()
     {
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 2: ");
+        displayInitialMsg(2);
         Console.Write("Please enter an annual return rate as a percentage in order to know how much time in years it will take for the original investment to double. If you want to end the program, enter -1 ");
 
         double percentageRate = convertToDouble("percentage rate");
@@ -157,8 +155,7 @@ class Program
 
     public static void RunQuestion3(){
         
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 3: ");
+        displayInitialMsg(3);
         Console.WriteLine("Welcome! In order to calculate the area of the triangle region, you will need to provide side lengths a, b, and c one at a time. If you instead want to end the program, please enter -1.");
     
         double areaOfTriangle = -1.00; // invalid and impossible result, so -1 as placeholder
@@ -214,8 +211,7 @@ class Program
     public static void RunQuestion4()
     {
     
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 4: ");
+        displayInitialMsg(4);
         Console.WriteLine("Please enter the number of compute hours used: ");
 
         double numberOfHours = convertToDouble("number of hours");
@@ -318,8 +314,7 @@ class Program
 
     public static void RunQuestion5()
     {
-        Console.WriteLine("--------------------------");
-        Console.WriteLine("Beginning of Question 5:");
+        displayInitialMsg(5);
         decimal dataEntry = 0.00m, totalSalesAmount = 0.00m;
         int numberOfSales = 0;
         Console.WriteLine("--------------------------");
@@ -346,8 +341,8 @@ class Program
 
     public static void RunQuestion6(){
         
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 6: ");
+        displayInitialMsg(6);
+        
         decimal initialInvestment = convertToDecimal("initial investment");
 
         if(initialInvestment == -1)
@@ -412,8 +407,8 @@ class Program
     public static void RunQuestion7()
 {
 
-    Console.WriteLine("----------------------------------------");
-    Console.WriteLine("Beginning of Question 7 ");
+    displayInitialMsg(7);
+
     Console.Write("Please enter 7 demand values, each separated by a space: ");
 
     string input = Console.ReadLine() ?? "";
@@ -507,9 +502,9 @@ class Program
 
 
     public static void RunQuestion8(){
-        
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 8 ");
+
+        displayInitialMsg(8);
+
         Console.WriteLine("Welcome. In order to assign a customer risk score method for a customer, you will need to enter different quantities. ");    
         
         int missedPayments = convertToInt("missed payments");
@@ -544,6 +539,10 @@ class Program
 
     public static void RunQuestion9()
     {
+
+        displayInitialMsg(9);
+
+        Console.Write("Welcome. Please enter the number of transaction amounts that you will need summary statistics for: ");
         
         int transactionAmounts = convertToInt("transaction amounts");
 
@@ -642,9 +641,9 @@ class Program
     */
 
     public static void RunQuestion10(){
-        
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("Beginning of Question 8 ");
+
+        displayInitialMsg(10);
+   
         Console.WriteLine("Welcome! In order to get started, you will be prompted to enter 7 sales amounts, representing the sales for each day");
 
         int count = 7;
@@ -951,13 +950,13 @@ class Program
 
     public static void displayInvalidRangeMsg(string min, string max){
         
-        Console.WriteLine("For the current program, you are expected to provide values between ("+min+","+max+"]. "+reaskForInput);
+        Console.WriteLine("For the current input field of this program, you are expected to provide values between ("+min+","+max+"]. "+reaskForInput);
 
     }
 
     public static void displayFormatExceptionMsg(string datatype){
 
-        Console.WriteLine("Please make sure that you entered a "+datatype+" data type for the input. "+reaskForInput);
+        Console.WriteLine("Please make sure that you entered a(n) "+datatype+" data type for the input. "+reaskForInput);
         
     }
 
@@ -970,6 +969,13 @@ class Program
     public static void displayInputMsg(string identifier)
     {
         Console.Write("Please enter input for "+identifier+": ");
+    }
+
+    public static void displayInitialMsg(int questionNumber){
+
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("Beginning of Question "+questionNumber+": ");
+        
     }
     
     
