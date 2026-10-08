@@ -36,21 +36,21 @@ class Program
     static void Main(string[] args)
     {
 
-        RunQuestion1();
+        // RunQuestion1();
 
-        RunQuestion2();
+        // RunQuestion2();
 
-        RunQuestion3();
+        // RunQuestion3();
 
-        RunQuestion4();
+        // RunQuestion4();
 
-        RunQuestion5();
+        // RunQuestion5();
 
-        RunQuestion6();
+        // RunQuestion6();
 
-        RunQuestion7();
+        // RunQuestion7();
 
-        RunQuestion8();
+        // RunQuestion8();
 
         RunQuestion9();
 
@@ -564,18 +564,18 @@ class Program
 
         displayInitialMsg(9);
 
-        Console.Write("Welcome. Please enter the number of transaction amounts that you will need summary statistics for: ");
+        Console.Write("Welcome. In order to obtain summary statistics, you will need to provide some pieces of information. ");
         
-        int transactionAmounts = convertToInt("transaction amounts");
+        int transactions = convertToInt("the number of transactions");
 
-        decimal [] arr = new decimal[transactionAmounts];
+        decimal [] arr = new decimal[transactions];
 
         int arrIndex = 0;
 
-        while(transactionAmounts > 0)
+        while(transactions > 0)
         {
 
-            decimal input = convertToDecimal("the transaction amount for transaction "+(arrIndex+1));
+            decimal input = convertToDecimal("the transaction amount of transaction "+(arrIndex+1));
 
             if(input == -1){
                 Console.WriteLine("You have decided to finish the program early");
@@ -584,7 +584,7 @@ class Program
 
             arr[arrIndex++] = input;
 
-            transactionAmounts--;
+            transactions--;
 
         }
 
@@ -600,7 +600,7 @@ class Program
 
         decimal average = Math.Round(calculateAverage(total, length),2);
 
-        string identifier = "demand value";
+        string identifier = "transaction amount";
 
         displayResults(minimum, maximum, total, average, identifier);
 
@@ -702,7 +702,7 @@ class Program
 
         decimal totalSales = calculateTotal(sales);
 
-        decimal average = Math.Round(calculateAverage(totalSales, sales.Length),2);
+        decimal average = calculateAverage(totalSales, sales.Length);
 
         decimal largest = calculateMax(sales);
 
@@ -712,9 +712,7 @@ class Program
 
         string identifier = "sale";
         
-        displayResults(smallest, largest, totalSales, average, identifier);
-
-        displayCountAbove(countAbove, average);
+        displayResults(smallest, largest, totalSales, average, identifier, countAbove, average);
 
         string label = "";
 
@@ -747,13 +745,13 @@ class Program
 
     public static decimal calculateAverage(decimal totalSum, int numberOfElements){
 
-        if(numberOfElements < 0)
+        if(numberOfElements <= 0)
         {
-            Console.WriteLine("Number of elements entered cannot be 0");
+            Console.WriteLine("Number of elements entered cannot be 0 or less");
             return -1.0m;
         }
 
-        return totalSum / numberOfElements;
+        return Math.Round(totalSum / numberOfElements,2);
 
     }
 
@@ -836,13 +834,17 @@ class Program
 
     }
 
-    public static void displayResults(decimal min, decimal max, decimal total, decimal average, string identifier)
+    public static void displayResults(decimal min, decimal max, decimal total, decimal average, string identifier, int countAbove = -1, decimal quantity = -1.00m)
     {
         
         Console.WriteLine("The minimum "+identifier+" is "+min);
         Console.WriteLine("The maximum "+identifier+" is "+max);
         Console.WriteLine("The total "+identifier+" amounts to "+total);
         Console.WriteLine("The average "+identifier+" is "+average);
+        if(countAbove != -1 && quantity != -1)
+        {
+            displayCountAbove(countAbove, quantity);
+        }
 
     }
 
