@@ -696,7 +696,11 @@ class Program
 
         decimal smallest = calculateMin(sales);
 
-        int countAbove = calculateCountAbove(average, sales);
+        int countAbove = calculateCountAbove(average, sales); 
+        
+        // my function calculateSummaryStatistics would be ideal to further reduce code, but we were asked to have a method for each separately and to call each on this function, 
+        // which is a good suggestion for 95% of scenarios due to separation of concerns. Since we require the same 4-5 pieces of info for more than one questions though, it can be 
+        // a good idea to call the method calculateSummaryStatistics instead to have one line and to do it in one loop.
 
         string identifier = "sale", classification = "";
         
@@ -818,7 +822,7 @@ class Program
         Console.WriteLine("The maximum "+identifier+" is "+max);
         Console.WriteLine("The total "+identifier+" amounts to "+total);
         Console.WriteLine("The average "+identifier+" is "+average);
-        if(countAbove != -1 && quantity != -1)
+        if(countAbove != -1 && quantity != -1) // optional inputs because question 9 does not require these but question 10 does
         {
             displayCountAbove(countAbove, quantity);
         }
