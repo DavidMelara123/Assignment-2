@@ -48,13 +48,13 @@ class Program
 
         // RunQuestion6();
 
-        // RunQuestion7();
+        RunQuestion7();
 
         // RunQuestion8();
 
         // RunQuestion9();
 
-        RunQuestion10();
+        // RunQuestion10();
 
     }
 
@@ -408,6 +408,131 @@ class Program
     }
 
 
+    /*
+
+    Technically, since question 7 only requires us to display information about demand values for 7 days, technically
+    maxDayDigits will always be 1, but I designed the program with the idea that if for some reason one day we have to 
+    change the requirement of 7 days to an amount of days specified by the user, then this solution would still hold.
+    It was a requirement though to ask specifically for demand values for 7 days. The reason it would still work is
+    because if we allow the user to specify the number of days via user input, and they specify 100 days, then that 
+    row will take a few more characters than the others, so the last | bar would not be at the same horizontal position.
+
+    I initially did maxDayDigits = Math.Max(maxDayDigits, val);
+    inside the for loop, but then I modified it because I realized that was silly. If we specify 100 days, the maximum is already 100.
+    So we just need to find the number of digits for that. And for people with some decent experience with leetcode,
+    it is a well known fact that any number has (int)(floor(log_10(number)))+1 digits, which can be easily obtained in 
+    O(1) time complexity. So I used int(floor(log_10(numberOfDays)))+1
+
+
+    */
+
+    public static void RunQuestion7(){
+
+        Console.WriteLine("Welcome. In order to see a table of demand values by day and the amount of tens of units, you will need to provide some information");
+
+        int numElements = 7;
+        
+        displayInitialMsg(numElements);
+
+        int index = 1;
+
+        int [] demandValues = new int[numElements];
+
+        int maxDayDigits = Convert.ToInt32(Math.Log10(numElements))+1, maxTensOfUnits = 0, maxDigitsDemandValue = 0;
+
+        while(index <= numElements)
+        {
+            
+            int val = convertToInt("demand value #"+index);
+
+            if(val == -1){
+                displayClosingMsg();
+                return;
+            }
+
+            demandValues[index-1] = val;
+
+            maxTensOfUnits = Math.Max(maxTensOfUnits, val / 10);
+
+            maxDigitsDemandValue = Math.Max(maxDigitsDemandValue, numDigits(val));
+
+            index++;
+
+        }
+
+        Console.WriteLine("Below is the table of results: \n");
+        
+
+        for(int i = 0; i < 7; i++){
+
+            string dayStr = "| Day: ";
+
+            Console.Write(dayStr+(i+1));
+
+            int digitsOfCurrentDay = numDigits(i+1);
+            
+            int dayPadding = maxDayDigits - digitsOfCurrentDay;
+
+            for(int j = 0; j < dayPadding; j++){ // for the current program requirements, this won't happen because every day has 1 digit, but I am designing it with the idea that in the future we may change the program to allow more days (meaning more digits). We want the tables to have the | bar at the same horizontal place, or otherwise it may look awful.
+                Console.Write(" ");
+            }
+
+            string demandStr = " | Demand Units: ";
+
+            Console.Write(demandStr+demandValues[i]);
+
+            int digitsDemandValue = numDigits(demandValues[i]);
+
+            int remainingDemandSpaces = maxDigitsDemandValue - digitsDemandValue;
+
+            for(int j = 0; j < remainingDemandSpaces; j++){
+                
+                Console.Write(" ");
+
+            }
+
+            string separator = " | ";
+
+            Console.Write(separator);
+
+            int tensOfUnits = demandValues[i] / 10;
+
+            for(int j = 0; j < tensOfUnits; j++){
+
+                Console.Write("*");
+
+            }
+
+            int remainingSpaces = maxTensOfUnits - tensOfUnits;
+
+            for(int j = 0; j < remainingSpaces; j++)
+            {
+                Console.Write(" ");
+            }    
+
+            Console.WriteLine(separator);
+
+            int totalTableLength = dayStr.Length + maxDayDigits + demandStr.Length + maxDigitsDemandValue + 2*separator.Length + maxTensOfUnits;
+
+            for(int j = 0; j < totalTableLength; j++){
+                Console.Write("-");
+            }
+
+            Console.WriteLine("");
+
+        }
+
+    }
+
+  public static int numDigits(int num){
+
+    return Convert.ToInt32(Math.Floor(Math.Log10(num)))+1; 
+        
+  }
+
+
+    /*
+
     public static void RunQuestion7()
 {
 
@@ -504,6 +629,7 @@ class Program
     }
 }
 
+    */
 
     public static void RunQuestion8(){
 
@@ -539,15 +665,7 @@ class Program
 
         Console.WriteLine("The risk score for the current client is: "+riskScore);
 
-        string classification = "";
-
-        if(riskScore < 30){
-            classification = "Low";
-        } else if(riskScore < 60) {
-            classification = "Moderate";
-        } else {
-            classification = "High";
-        }
+        string classification = riskScore < 30 ? "Low" : riskScore < 60 ? "Moderate" : "High";
 
         Console.WriteLine("The risk for the current client is "+classification);
 
@@ -872,8 +990,9 @@ class Program
 
     }
 
-    // reusable functions to convert user input to different data types
-    // while having modular, reusable, concise, readable, and efficient code.
+    /* reusable functions to convert user input 
+       to different data types while having modular, 
+       reusable, concise, readable, and efficient code. */
 
     public static double convertToDouble(string identifier){
         
