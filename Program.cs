@@ -438,7 +438,7 @@ class Program
 
         int [] demandValues = new int[numElements];
 
-        int maxDayDigits = Convert.ToInt32(Math.Log10(numElements))+1, maxTensOfUnits = 0, maxDigitsDemandValue = 0;
+        int maxDayDigits = numDigits(numElements), maxTensOfUnits = 0, maxDigitsDemandValue = 0;
 
         while(index <= numElements)
         {
@@ -460,30 +460,25 @@ class Program
 
         }
 
-        Console.WriteLine("Below is the table of results: \n");
+        Console.WriteLine("\nBelow is the table of results: \n");
+
+        string dayStr = "| Day: ", demandStr = " | Demand Value: ", tensStr = " | Tens of Demand Units: ", separator = " |";
         
+        int totalTableLength = dayStr.Length + maxDayDigits + demandStr.Length + maxDigitsDemandValue + tensStr.Length  + separator.Length + maxTensOfUnits;
 
         for(int i = 0; i < 7; i++){
 
-            string dayStr = "| Day: ";
-
             Console.Write(dayStr+(i+1));
 
-            int digitsOfCurrentDay = numDigits(i+1);
-            
-            int dayPadding = maxDayDigits - digitsOfCurrentDay;
+            int digitsOfCurrentDay = numDigits(i+1), dayPadding = maxDayDigits - digitsOfCurrentDay;
 
             for(int j = 0; j < dayPadding; j++){ // for the current program requirements, this won't happen because every day has 1 digit, but I am designing it with the idea that in the future we may change the program to allow more days (meaning more digits). We want the tables to have the | bar at the same horizontal place, or otherwise it may look awful.
                 Console.Write(" ");
             }
 
-            string demandStr = " | Demand Units: ";
-
             Console.Write(demandStr+demandValues[i]);
 
-            int digitsDemandValue = numDigits(demandValues[i]);
-
-            int remainingDemandSpaces = maxDigitsDemandValue - digitsDemandValue;
+            int digitsDemandValue = numDigits(demandValues[i]), remainingDemandSpaces = maxDigitsDemandValue - digitsDemandValue;
 
             for(int j = 0; j < remainingDemandSpaces; j++){
                 
@@ -491,9 +486,7 @@ class Program
 
             }
 
-            string separator = " | ";
-
-            Console.Write(separator);
+            Console.Write(tensStr);
 
             int tensOfUnits = demandValues[i] / 10;
 
@@ -512,8 +505,6 @@ class Program
 
             Console.WriteLine(separator);
 
-            int totalTableLength = dayStr.Length + maxDayDigits + demandStr.Length + maxDigitsDemandValue + 2*separator.Length + maxTensOfUnits;
-
             for(int j = 0; j < totalTableLength; j++){
                 Console.Write("-");
             }
@@ -529,107 +520,6 @@ class Program
     return Convert.ToInt32(Math.Floor(Math.Log10(num)))+1; 
         
   }
-
-
-    /*
-
-    public static void RunQuestion7()
-{
-
-    displayInitialMsg(7);
-
-    Console.Write("Please enter 7 demand values, each separated by a space: ");
-
-    string input = Console.ReadLine() ?? "";
-    
-    Console.WriteLine();
-    
-    string[] tokens = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-    
-    if (tokens.Length != 7){
-    
-        Console.WriteLine("Error: You must enter exactly 7 values.");
-    
-        return;
-
-    }
-    
-    int[] demandValues = new int[7];
-    
-    int maxTens = 0;
-    
-    int maxLabelLength = 0;
-    
-    string[] labels = new string[7];
-    
-    for (int i = 0; i < 7; i++) {
-
-        int value = 0;
-
-        try {
-            
-            value = Convert.ToInt32(tokens[i]);
-
-        } catch(Exception e){
-
-            Console.Write("At least one of the daily demands entered was non numeric. Please make sure that all the daily demand values are numeric. Error: "+e);
-            return;
-
-        }
-
-        if (value < 0){
-            Console.WriteLine("Demand values cannot be negative. "+value+" is negative");
-            return;
-        }
-
-        demandValues[i] = value;
-
-        maxTens = Math.Max(maxTens, value / 10);
-
-        labels[i] = "| Day " + (i + 1) + " | Demand Value: " + demandValues[i] + " | Tens of Demand Units: ";
-        
-        maxLabelLength = Math.Max(maxLabelLength, labels[i].Length);
-
-    }
-    
-    int totalTableWidth = maxLabelLength + maxTens + 2;
-
-    for (int i = 0; i < 7; i++){
-
-        string currentLabel = labels[i];
-
-        Console.Write(currentLabel);
-
-        int paddingSpaces = maxLabelLength - currentLabel.Length;
-
-        for (int j = 0; j < paddingSpaces; j++){
-            Console.Write(" ");
-        }
-
-        int starsCount = demandValues[i] / 10;
-
-        for (int j = 0; j < starsCount; j++){
-            Console.Write("*");
-        }
-        
-        int trailingSpaces = maxTens - starsCount;
-        
-        for (int j = 0; j < trailingSpaces; j++)
-        {
-            Console.Write(" ");
-        }
-        
-        Console.WriteLine(" |");
-
-        for (int j = 0; j < totalTableWidth; j++)
-        {
-            Console.Write("-");
-        }
-        Console.WriteLine();
-    }
-}
-
-    */
 
     public static void RunQuestion8(){
 
