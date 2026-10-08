@@ -325,7 +325,7 @@ class Program
         Console.WriteLine("--------------------------");
         while(dataEntry != -1.00m){
 
-            dataEntry = convertToDecimal("the sale amount of sale #", (numberOfSales+1).ToString());
+            dataEntry = convertToDecimal("the sale amount of sale #"+(numberOfSales+1).ToString());
 
             if(dataEntry > 0){
                 totalSalesAmount += dataEntry;
@@ -922,11 +922,11 @@ class Program
 
     }
 
-    public static decimal convertToDecimal(string identifier, string optional = ""){
+    public static decimal convertToDecimal(string identifier){
 
       decimal variable = -1.00m;
 
-      displayInputMsg(identifier, optional);
+      displayInputMsg(identifier);
 
       while(variable <= 0) {
 
@@ -981,7 +981,7 @@ class Program
     }
 
     public static void displayInputMsg(string identifier, string optionalString = ""){
-        Console.Write("Please enter input for "+identifier+optionalString+". Alternatively, if you want to end the program for the current question, enter -1: ");
+        Console.Write("Please enter input for "+identifier+". Alternatively, if you want to end the program for the current question, enter -1: ");
     }
 
     public static void displayInitialMsg(int questionNumber){
