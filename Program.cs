@@ -2,6 +2,8 @@
 using System.Text;
 class Program
 {
+
+    public static string closingMessage = "You have decided to finish the program early";
     static void Main(string[] args)
     {
 
@@ -37,47 +39,30 @@ class Program
 
         decimal customers = convertToDecimal("Number of customers");
 
+        if(customers == -1)
+        {
+            Console.WriteLine("You have decided to finish the program");
+            return;
+        }
+
         decimal monthlyPrice = convertToDecimal("Monthly Price");
 
+        if(monthlyPrice == -1)
+        {
+            Console.WriteLine("You have decided to finish the program");
+            return;
+        }
+
         decimal percentageIncrease = convertToDecimal("Percentage Increase");
+
+        if(monthlyPrice == -1)
+        {
+            Console.WriteLine(closingMessage);
+        }
 
         print_subscription_revenue(customers, monthlyPrice, percentageIncrease);
             
     }
-
-    
-    public static decimal convertToDecimal(string identifier)
-    {
-
-      decimal variable = -1.00m;
-
-      Console.WriteLine("Please enter the "+identifier+" ");
-
-      while(variable < 0) {
-
-        try
-        {
-            
-            variable = Convert.ToDecimal(Console.ReadLine() ?? "");
-
-            if(variable < 0)
-            {
-                Console.WriteLine(identifier+" cannot be negative. Please try again: ");
-                continue;
-            } 
-
-        } catch(FormatException){
-            Console.WriteLine(identifier+" should have a decimal data type. Please try again: ");
-        } catch(OverflowException){
-            Console.WriteLine("Please make sure that your variables fit within the allowed range for a decimal");
-        }
-
-      }
-
-      return variable;
-
-    }
-
 
     public static void print_subscription_revenue(decimal customers, decimal monthlyPrice, decimal percentageIncrease)
     {
@@ -101,22 +86,16 @@ class Program
     {
         Console.WriteLine("----------------------------------------");
         Console.WriteLine("Beginning of Question 2: ");
-        double percentageRate = 0.00;
+        Console.Write("Please enter an annual return rate as a percentage in order to know how much time in years it will take for the original investment to double. If you want to end the program, enter -1 ");
 
-        Console.Write("Please enter an annual return rate as a percentage in order to know how much time in years it will take for the original investment to double: ");
+        double percentageRate = convertToDouble("percentage rate");
 
-        while(percentageRate <= 0.00) {
-            try {
-                percentageRate = Convert.ToDouble(Console.ReadLine());
-                 if(percentageRate <= 0){
-                    Console.WriteLine("\nA percentage rate less than or equal to 0 is not allowed. Please try again. ");
-                 }
-            } catch(FormatException){
-                Console.WriteLine("\nThe percentage rate must be numeric. Please try again with the correct data type. ");
-            } catch (OverflowException){
-                Console.WriteLine("One or more of the input values was outside the allowable range.");
-            }
+        if(percentageRate == -1.00)
+        {
+            Console.WriteLine("You have chosen to end the program");
+            return;
         }
+
         double result = calculate_time_double_investment(percentageRate);
         Console.WriteLine("Specifically, the time it will take for the investment to double is "+result+" years");
     }
@@ -148,17 +127,32 @@ class Program
         
         Console.WriteLine("----------------------------------------");
         Console.WriteLine("Beginning of Question 3: ");
-        Console.WriteLine("Welcome! In order to calculate the area of the triangle region, you will need to provide side lengths a, b, and c one at a time");
+        Console.WriteLine("Welcome! In order to calculate the area of the triangle region, you will need to provide side lengths a, b, and c one at a time. If you instead want to end the program, please enter -1.");
     
         double areaOfTriangle = -1.00; // invalid and impossible result, so -1 as placeholder
 
         while(areaOfTriangle == -1.00) {
 
-            double a = obtainSideLength("a");
+            double a = convertToDouble("side length a");
 
-            double b = obtainSideLength("b");
+            if(a == -1)
+            {
+                Console.WriteLine(closingMessage);
+            }
 
-            double c = obtainSideLength("c");
+            double b = convertToDouble("side length b");
+
+            if(b == -1)
+            {
+                Console.WriteLine(closingMessage);
+            }
+
+            double c = convertToDouble("side length c");
+
+            if(c == -1)
+            {
+                Console.WriteLine(closingMessage);
+            }
 
             areaOfTriangle = calculateTriangleArea(a,b,c);
 
@@ -223,23 +217,10 @@ class Program
         Console.WriteLine("Beginning of Question 4: ");
         Console.WriteLine("Please enter the number of compute hours used: ");
 
-        double numberOfHours = -1.00; // invalid, as a way for the program to know when to continue and when to stop
+        double numberOfHours = convertToDouble("number of hours");
 
-        while(numberOfHours < 0) {
-            try
-            {
-                numberOfHours = Convert.ToDouble(Console.ReadLine() ?? "");
-                if(numberOfHours < 0)
-                {
-                    Console.WriteLine("The number of compute hours must be non negative. Please try again: ");
-                }
-            } catch(FormatException) {
-                Console.WriteLine("The number of compute hours must be a numeric input. Please try again: ");
-            } catch(OverflowException)
-            {
-                Console.WriteLine("Please make sure that the number of hours fits within the range of the double data type: [0,"+Double.MaxValue+"]. Please try again: ");
-            }
-
+        if(numberOfHours == -1){
+            Console.WriteLine("You have chosen to end the program");
         }
 
         decimal total_invoice = CalculateAndDisplayInvoice(numberOfHours);
@@ -319,10 +300,8 @@ class Program
     public static decimal calculateComputerChargesElegantly(double hours)
     {
 
-        double upperThreshold = 500;
+        double upperThreshold = 500, firstThreshold = 100; 
 
-        double firstThreshold = 100;
-        
         decimal charges = Math.Max(0.00m, 0.06m * Convert.ToDecimal(hours-upperThreshold)) + Math.Max(0.00m, 0.09m * Convert.ToDecimal((Math.Min(upperThreshold,hours)-firstThreshold))) + 0.12m * Convert.ToDecimal(Math.Min(firstThreshold,hours));
 
         return charges;
@@ -342,25 +321,17 @@ class Program
         Console.WriteLine("Beginning of Question 5:");
         decimal dataEntry = 0.00m, totalSalesAmount = 0.00m;
         int numberOfSales = 0;
-        while(dataEntry != -1.00m)
-        {
-            try {
-            Console.WriteLine("--------------------------");
-            Console.Write("Please enter a new sale amount ");
-            dataEntry = Convert.ToDecimal(Console.ReadLine() ?? "");
-                if(dataEntry > 0) {
-                    totalSalesAmount += dataEntry;
-                    numberOfSales++;
-                } else if(dataEntry != -1)
-                {
-                
-                    Console.WriteLine("Please enter a valid sales amount. A sales amount has to be positive. If you want to end the program, enter -1");
-                    continue;
-                }
-            } catch(FormatException) {
-                Console.WriteLine("Please make sure to enter a numeric sale amount. ");
+        Console.WriteLine("--------------------------");
+        Console.Write("Please enter a new sale amount ");
+        while(dataEntry != -1.00m){
+
+            dataEntry = convertToDecimal("sale amount");
+
+            if(dataEntry > 0){
+                totalSalesAmount += dataEntry;
+                numberOfSales++;
             }
- 
+            
         }
 
         if(numberOfSales == 0)
@@ -379,33 +350,28 @@ class Program
         decimal initialInvestment = convertToDecimal("initial investment");
         decimal monthlyBenefit = convertToDecimal("monthly benefit");
 
+        if(initialInvestment == -1 || monthlyBenefit == -1)
+        {
+            Console.WriteLine("You have decided to finish the program");
+        }
+
         recoup(initialInvestment, monthlyBenefit);
 
     }
 
-    // public static void RunQuestion6()
-    // {
-    //     Console.WriteLine("----------------------------------------");
-    //     Console.WriteLine("Beginning of Question 6: ");
-    //     decimal initialInvestment = 0.00m;
-    //     decimal monthlyBenefit = 0.00m;
-    //     try {
-          
-    //         Console.Write("Please enter your initial investment: ");
-    //         initialInvestment = Convert.ToDecimal(Console.ReadLine());
-    //         Console.Write("Thanks. Now please enter the monthly benefit: ");
-    //         monthlyBenefit = Convert.ToDecimal(Console.ReadLine());
-    //         if(initialInvestment <= 0 || monthlyBenefit <= 0)
-    //         {
-    //             Console.WriteLine("Both the initial investment and the monthly benefit must be greater than 0");
-    //             return;
-    //         }
-    //         recoup(initialInvestment, monthlyBenefit);
-    //     } catch(FormatException){
-    //         Console.Write("Both the initial investment or the expected monthly benefit must be numeric. ");
-    //     }   
+    /*
 
-    // }
+        Please note that just as I mentioned in the google doc, the below calculation
+        takes O(initialInvestment / monthlyBenefit) time complexity. A faster approach
+        would be to just do Math.Round(initialInvestment / monthlyBenefit), which would
+        take O(1) (i.e constant) time complexity. However, because we need to display
+        (for each month) how much money is left before we can get back as much in 
+        cumulative benefits as our initial investment, that is why it is a requirement
+        to do a while loop. But if that requirement was not there, we could just do 
+        a Math.Round(initialInvestment / monthlyBenefit) in O(1) time complexity
+        to solve it in one line.
+
+    */
 
     public static void recoup(decimal initialInvestment, decimal monthlyBenefit)
     {
@@ -567,15 +533,15 @@ class Program
 
         Console.Write("Please enter the "+label+": ");
 
-        while(variable < 0){
+        while(variable <= 0){
 
             try {
             
                 variable = Convert.ToInt32(Console.ReadLine() ?? "");
 
-                if(variable < 0)
+                if(variable <= 0)
                 {
-                    Console.WriteLine("Please make sure that the integer you entered for "+label+" is not negative. Please try again: ");
+                    Console.WriteLine("Please make sure that the integer you entered for "+label+" is positive. Please try again: ");
                 }
 
             } catch(FormatException){
@@ -592,6 +558,75 @@ class Program
         }
 
         return variable;
+
+    }
+
+    public static double convertToDouble(string label){
+        
+        double variable = -1.0;
+
+        Console.Write("Please enter the "+label);
+
+        while(variable <= 0){
+            
+            try
+            {
+
+                variable = Convert.ToDouble(Console.ReadLine() ?? "");
+
+                if(variable <= 0)
+                {
+                    Console.WriteLine("Please make sure that the double you entered is greater than or equal to 0. ");
+                }
+
+            } catch(FormatException){
+                
+                Console.WriteLine("Please make sure that you entered a double for "+label+". Please try again: ");
+
+            } catch(OverflowException) {
+                
+                Console.WriteLine("Please make sure that the double you entered is in the range [0,"+Double.MaxValue+"]. Please try again: ");
+
+            }
+
+        }
+
+        return variable;
+
+    }
+
+      public static decimal convertToDecimal(string identifier)
+    {
+
+      decimal variable = -1.00m;
+
+      Console.WriteLine("Please enter the "+identifier+" ");
+
+      while(variable < 0) {
+
+        try
+        {
+            
+            variable = Convert.ToDecimal(Console.ReadLine() ?? "");
+
+            if(variable == -1.00m)
+            {
+                return variable;  
+            } else if(variable < 0)
+            {
+                Console.WriteLine(identifier+" cannot be negative. Please try again: ");
+                continue;
+            } 
+
+        } catch(FormatException){
+            Console.WriteLine(identifier+" should have a decimal data type. Please try again: ");
+        } catch(OverflowException){
+            Console.WriteLine("Please make sure that your variables fit within the allowed range for a decimal");
+        }
+
+      }
+
+      return variable;
 
     }
 
@@ -614,6 +649,11 @@ class Program
         {
 
             decimal input = convertToDecimal("the transaction amount for transaction "+(arrIndex+1));
+
+            if(input == -1){
+                Console.WriteLine("You have decided to finish the program early");
+                return;
+            }
 
             arr[arrIndex++] = input;
 
@@ -671,7 +711,7 @@ class Program
         for each. It is not a wrong approach. In fact, both serve different purposes.
         And neither approach is better than the other. It just really depends on
         the task at hand. If you are going to have multiple situations in which 
-        you need min, max, average, and total, it can be a good idea to go a method
+        you need the four quantities min, max, average, and total, it can be a good idea to do a method
         such as the one I did called "calculateSummaryStatistics." But if you
         are going to have many functions, some that ask for only the min, some that
         only ask for the max, some that ask for only the average, it might be better
