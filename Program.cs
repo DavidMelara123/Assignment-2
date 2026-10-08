@@ -196,7 +196,7 @@ class Program
     public static double calculateTriangleArea(double a, double b, double c){
         
         /* by this point, a, b, and c are all guaranteed to be strictly greater than 0.
-         I refactored code because it came to my attention that the earlier condition would not be able to handle edge cases where two side lengths could add to more than Double.MaxValue (it would overflow!)
+         I refactored code because it came to my attention that the earlier condition would not be able to handle edge cases where two side lengths could add to more than Double.MaxValue, which would lead to overflow
          So instead of checking whether a >= b+c || b >= a + c || c >= a + b I changed those to a-b >= c || b-c >= a || c-a >= b for every single condition. Since
          all of them are strictly greater than 0 by this point in the code, none of them will overflow in the opposite direction (i.e Double.MaxValue - (the negative in Double.MinValue) = Double.MaxValue + Absolute value of (Double.MinValue) = overflow cannot happen either) */
         if(a-b >= c || b-c >= a || c-a >= b)
