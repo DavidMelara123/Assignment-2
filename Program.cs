@@ -12,7 +12,10 @@ class Program
         If we need to change the message in the future, we will just have to change
         the message in one spot (the variable)
         rather than have to go through each method and change the same message
-        multiple times.
+        multiple times. Normally I would place them in another file and import it
+        to this file (due to separation of concerns), but we are required to only
+        submit one c sharp file. In practice, it is a good idea to have a constants
+        in another file (for separation of concerns).
     */
 
     public static string closingMessage = "You have decided to finish the program early";
@@ -64,7 +67,7 @@ class Program
         Console.WriteLine("-----------------------");
         Console.WriteLine("Beginning of Question 1");
 
-        decimal customers = convertToDecimal("Number of customers");
+        decimal customers = convertToInt("Number of customers");
 
         if(customers == -1)
         {
@@ -573,7 +576,7 @@ class Program
 
         decimal total = calculateTotal(arr);
 
-        decimal average = calculateAverage(total, length);
+        decimal average = Math.Round(calculateAverage(total, length),2);
 
         string identifier = "demand value";
 
@@ -953,7 +956,7 @@ class Program
 
     public static void displayFormatExceptionMsg(string datatype){
 
-        Console.WriteLine("Please make sure that you entered a "+datatype+" for the input. "+reaskForInput);
+        Console.WriteLine("Please make sure that you entered a "+datatype+" data type for the input. "+reaskForInput);
         
     }
 
@@ -965,7 +968,7 @@ class Program
 
     public static void displayInputMsg(string identifier)
     {
-        Console.Write("Please enter the "+identifier);
+        Console.Write("Please enter input for "+identifier+": ");
     }
     
     
