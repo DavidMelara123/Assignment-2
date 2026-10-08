@@ -114,7 +114,7 @@ class Program
     public static void RunQuestion2()
     {
         displayInitialMsg(2);
-        Console.WriteLine("You will be asked to enter an annual return rate as a percentage in order to know how much time in years it will take for the original investment to double. If you want to end the program, enter -1. ");
+        Console.Write("You will be asked to enter an annual return rate as a percentage in order to know how much time in years it will take for the original investment to double. ");
 
         double percentageRate = convertToDouble("percentage rate");
 
@@ -154,7 +154,7 @@ class Program
     public static void RunQuestion3(){
         
         displayInitialMsg(3);
-        Console.WriteLine("Welcome! In order to calculate the area of the triangle region, you will need to provide side lengths a, b, and c one at a time. If you instead want to end the program, please enter -1.");
+        Console.Write("Welcome! In order to calculate the area of the triangle region, you will need to provide side lengths a, b, and c one at a time. ");
     
         double areaOfTriangle = -1.00; // invalid and impossible result, so -1 as placeholder
 
@@ -323,10 +323,9 @@ class Program
         decimal dataEntry = 0.00m, totalSalesAmount = 0.00m;
         int numberOfSales = 0;
         Console.WriteLine("--------------------------");
-        Console.Write("Please enter a new sale amount ");
         while(dataEntry != -1.00m){
 
-            dataEntry = convertToDecimal("sale amount");
+            dataEntry = convertToDecimal("the sale amount of sale #", (numberOfSales+1).ToString());
 
             if(dataEntry > 0){
                 totalSalesAmount += dataEntry;
@@ -931,11 +930,11 @@ class Program
 
     }
 
-    public static decimal convertToDecimal(string identifier){
+    public static decimal convertToDecimal(string identifier, string optional = ""){
 
       decimal variable = -1.00m;
 
-      displayInputMsg(identifier);
+      displayInputMsg(identifier, optional);
 
       while(variable <= 0) {
 
@@ -989,9 +988,8 @@ class Program
 
     }
 
-    public static void displayInputMsg(string identifier)
-    {
-        Console.Write("Please enter input for "+identifier+": ");
+    public static void displayInputMsg(string identifier, string optionalString = ""){
+        Console.Write("Please enter input for "+identifier+optionalString+". Alternatively, if you want to end the program for the current question, enter -1: ");
     }
 
     public static void displayInitialMsg(int questionNumber){
