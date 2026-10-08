@@ -52,7 +52,7 @@ class Program
 
         // RunQuestion8();
 
-        RunQuestion9();
+        // RunQuestion9();
 
         RunQuestion10();
 
@@ -674,27 +674,15 @@ class Program
 
         while(count > 0){
 
-            try {
+            decimal variable = convertToDecimal("sale #"+(sales.Length-count+1));
 
-                Console.Write("Please enter a new sales amount: ");
-
-                decimal variable = Convert.ToDecimal(Console.ReadLine() ?? "");
-
-                if(variable < 0)
-                {
-                    Console.WriteLine("One of the entered sales amounts is negative. You need to make sure your sales amounts are all positive. Please try again!");
-                    continue;
-                }
-                
-                sales[sales.Length-count] = variable;
-
-            } catch(Exception){
-                
-                Console.WriteLine("One of the inputted values is not numeric. Please make sure to enter numeric sales amounts.");
-
-                continue;
-
+            if(variable == -1)
+            {
+                displayClosingMsg();
+                return;
             }
+
+            sales[sales.Length-count] = variable;
 
             count--;
             
@@ -710,24 +698,13 @@ class Program
 
         int countAbove = calculateCountAbove(average, sales);
 
-        string identifier = "sale";
+        string identifier = "sale", classification = "";
         
         displayResults(smallest, largest, totalSales, average, identifier, countAbove, average);
 
-        string label = "";
-
-        if(countAbove > 3)
-        {
-            label = "Strong";
-        } else if(countAbove > 1)
-        {
-            label = "Balanced";
-        } else
-        {
-            label = "Concentrated";
-        }
+        classification = countAbove > 3 ? "Strong" : countAbove > 1 ? "Balanced" : "Concentrated";
         
-        Console.WriteLine("The week has a classification of "+label);
+        Console.WriteLine("The week has a classification of "+classification);
 
     }
 
