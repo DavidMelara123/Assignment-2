@@ -3,7 +3,34 @@ using System.Text;
 class Program
 {
 
+    // reusable constants and strings in order to avoid repeating oneself unnecessarily.
+    /*
+        while these variable may seem unnecessary, and (I acknowledge) perhaps weird, 
+        they are used throughout multiple reusable functions, so if in the future
+        we need to change the message, it would be POOR practice to have to go
+        through more than one function JUST to change the same message. 
+        If we need to change the message in the future, we will just have to change
+        the message in one spot (the variable)
+        rather than have to go through each method and change the same message
+        multiple times.
+    */
+
     public static string closingMessage = "You have decided to finish the program early";
+
+    public static string reaskForInput = "Please try again. Otherwise, if you intend to stop running the program, press -1:";
+
+    public static string programMin = "0";
+    public static string maxInt = (Int32.MaxValue).ToString();
+    public static string maxDouble = (Double.MaxValue).ToString();
+
+    public static string maxDecimal = (Decimal.MaxValue).ToString();
+
+    public static string minInt = (Int32.MinValue).ToString();
+
+    public static string minDouble = (Double.MinValue).ToString();
+
+    public static string minDecimal = (Decimal.MinValue).ToString();
+
     static void Main(string[] args)
     {
 
@@ -41,7 +68,7 @@ class Program
 
         if(customers == -1)
         {
-            Console.WriteLine("You have decided to finish the program");
+            Console.WriteLine(closingMessage);
             return;
         }
 
@@ -49,7 +76,7 @@ class Program
 
         if(monthlyPrice == -1)
         {
-            Console.WriteLine("You have decided to finish the program");
+            Console.WriteLine(closingMessage);
             return;
         }
 
@@ -58,6 +85,7 @@ class Program
         if(monthlyPrice == -1)
         {
             Console.WriteLine(closingMessage);
+            return;
         }
 
         print_subscription_revenue(customers, monthlyPrice, percentageIncrease);
@@ -138,6 +166,7 @@ class Program
             if(a == -1)
             {
                 Console.WriteLine(closingMessage);
+                return;
             }
 
             double b = convertToDouble("side length b");
@@ -145,6 +174,7 @@ class Program
             if(b == -1)
             {
                 Console.WriteLine(closingMessage);
+                return;
             }
 
             double c = convertToDouble("side length c");
@@ -152,6 +182,7 @@ class Program
             if(c == -1)
             {
                 Console.WriteLine(closingMessage);
+                return;
             }
 
             areaOfTriangle = calculateTriangleArea(a,b,c);
@@ -160,40 +191,6 @@ class Program
 
 
         Console.WriteLine("\nThe area of the triangle is: "+areaOfTriangle);
-
-    }
-
-    public static double obtainSideLength(string identifier)
-    {
-
-        double sideLength = 0.00;
-
-        Console.Write("\nPlease enter side length for side "+identifier+": ");
-
-        while(sideLength <= 0.00) {
-        
-            try {
-
-                sideLength = Convert.ToDouble(Console.ReadLine() ?? "");
-
-                if(sideLength <= 0.00)
-                {
-                    Console.WriteLine("\nEach side length of any valid triangle must be greater than 0. Please try again for side length "+identifier+": ");
-                }
-
-            } catch(FormatException) {
-                
-                Console.WriteLine("\nThe data type of the entered side length must be double. Please try again for side length "+identifier+": ");
-
-            } catch(OverflowException) {
-                
-                Console.WriteLine("\nPlease make sure that the side length that you entered fits within the range [0,"+Double.MaxValue+"] in order to prevent overflow. Please try again: ");
-
-            }
-
-        }
-        
-        return sideLength;
 
     }
 
@@ -348,11 +345,19 @@ class Program
         Console.WriteLine("----------------------------------------");
         Console.WriteLine("Beginning of Question 6: ");
         decimal initialInvestment = convertToDecimal("initial investment");
+
+        if(initialInvestment == -1)
+        {
+            Console.WriteLine(closingMessage);
+            return;
+        }
+
         decimal monthlyBenefit = convertToDecimal("monthly benefit");
 
-        if(initialInvestment == -1 || monthlyBenefit == -1)
+        if(monthlyBenefit == -1)
         {
-            Console.WriteLine("You have decided to finish the program");
+            Console.WriteLine(closingMessage);
+            return;
         }
 
         recoup(initialInvestment, monthlyBenefit);
@@ -524,109 +529,6 @@ class Program
         }
 
         Console.WriteLine("The risk for the current client is "+classification);
-
-    }
-
-    public static int convertToInt(string label){
-        
-        int variable = -1;
-
-        Console.Write("Please enter the "+label+": ");
-
-        while(variable <= 0){
-
-            try {
-            
-                variable = Convert.ToInt32(Console.ReadLine() ?? "");
-
-                if(variable <= 0)
-                {
-                    Console.WriteLine("Please make sure that the integer you entered for "+label+" is positive. Please try again: ");
-                }
-
-            } catch(FormatException){
-
-                Console.WriteLine("Please make sure that you entered an integer for "+label+". Please try again: ");
-                
-            } catch(OverflowException){
-                
-                Console.WriteLine("Please make sure that the integer you entered is in the range [0,"+Int32.MaxValue+"]. Please try again: ");
-
-            }
-
-
-        }
-
-        return variable;
-
-    }
-
-    public static double convertToDouble(string label){
-        
-        double variable = -1.0;
-
-        Console.Write("Please enter the "+label);
-
-        while(variable <= 0){
-            
-            try
-            {
-
-                variable = Convert.ToDouble(Console.ReadLine() ?? "");
-
-                if(variable <= 0)
-                {
-                    Console.WriteLine("Please make sure that the double you entered is greater than or equal to 0. ");
-                }
-
-            } catch(FormatException){
-                
-                Console.WriteLine("Please make sure that you entered a double for "+label+". Please try again: ");
-
-            } catch(OverflowException) {
-                
-                Console.WriteLine("Please make sure that the double you entered is in the range [0,"+Double.MaxValue+"]. Please try again: ");
-
-            }
-
-        }
-
-        return variable;
-
-    }
-
-      public static decimal convertToDecimal(string identifier)
-    {
-
-      decimal variable = -1.00m;
-
-      Console.WriteLine("Please enter the "+identifier+" ");
-
-      while(variable < 0) {
-
-        try
-        {
-            
-            variable = Convert.ToDecimal(Console.ReadLine() ?? "");
-
-            if(variable == -1.00m)
-            {
-                return variable;  
-            } else if(variable < 0)
-            {
-                Console.WriteLine(identifier+" cannot be negative. Please try again: ");
-                continue;
-            } 
-
-        } catch(FormatException){
-            Console.WriteLine(identifier+" should have a decimal data type. Please try again: ");
-        } catch(OverflowException){
-            Console.WriteLine("Please make sure that your variables fit within the allowed range for a decimal");
-        }
-
-      }
-
-      return variable;
 
     }
 
@@ -926,6 +828,146 @@ class Program
 
     }
 
+    public static int convertToInt(string identifier){
+        
+        int variable = -1;
+
+        displayInputMsg(identifier);
+
+        while(variable <= 0){
+
+            try {
+            
+                variable = Convert.ToInt32(Console.ReadLine() ?? "");
+
+                if(variable == -1){
+                    return variable;
+                }else if(variable <= 0)
+                {
+                    displayInvalidRangeMsg(programMin, maxInt);
+                }
+
+            } catch(FormatException){
+
+                displayFormatExceptionMsg("int");
+                
+            } catch(OverflowException){
+
+                displayOverflowMsg(minInt, maxInt);
+                
+            }
+
+
+        }
+
+        return variable;
+
+    }
+
+    // reusable functions to convert user input to different data types
+    // while having modular, reusable, concise, readable, and efficient code.
+
+    public static double convertToDouble(string identifier){
+        
+        double variable = -1.0;
+
+        displayInputMsg(identifier);
+
+        while(variable <= 0){
+            
+            try
+            {
+
+                variable = Convert.ToDouble(Console.ReadLine() ?? "");
+
+                if(variable == -1)
+                {
+                    return variable;
+                } else if(variable <= 0)
+                {
+                    displayInvalidRangeMsg(programMin, maxDouble);
+                    continue;
+                }
+
+            } catch(FormatException){
+                
+                displayFormatExceptionMsg("double");
+
+            } catch(OverflowException) {
+
+                displayOverflowMsg(minDouble, maxDouble);
+                
+            }
+
+        }
+
+        return variable;
+
+    }
+
+    public static decimal convertToDecimal(string identifier){
+
+      decimal variable = -1.00m;
+
+      displayInputMsg(identifier);
+
+      while(variable <= 0) {
+
+        try
+        {
+            
+            variable = Convert.ToDecimal(Console.ReadLine() ?? "");
+
+            if(variable == -1.00m)
+            {
+                return variable;  
+            } else if(variable <= 0)
+            {
+                displayInvalidRangeMsg(programMin, maxDecimal);
+                continue;
+            } 
+
+        } catch(FormatException){
+
+            displayFormatExceptionMsg("decimal");
+
+        } catch(OverflowException){
+
+            displayOverflowMsg(minDecimal, maxDecimal);
+            
+        }
+
+      }
+
+      return variable;
+
+    }
+
+    // functions to display common messages (practicing reusability as much as we can)
+
+    public static void displayInvalidRangeMsg(string min, string max){
+        
+        Console.WriteLine("For the current program, you are expected to provide values between ("+min+","+max+"]. "+reaskForInput);
+
+    }
+
+    public static void displayFormatExceptionMsg(string datatype){
+
+        Console.WriteLine("Please make sure that you entered a "+datatype+" for the input. "+reaskForInput);
+        
+    }
+
+    public static void displayOverflowMsg(string min, string max){
+        
+        Console.WriteLine("Please make sure that your variables fit within the allowed range for the given datatype: ["+min+","+max+"]. "+reaskForInput);
+
+    }
+
+    public static void displayInputMsg(string identifier)
+    {
+        Console.Write("Please enter the "+identifier);
+    }
+    
     
     
 
