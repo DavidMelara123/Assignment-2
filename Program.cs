@@ -14,8 +14,9 @@ class Program
         rather than have to go through each method and change the same message
         multiple times. Normally I would place them in another file and import it
         to this file (due to separation of concerns), but we are required to only
-        submit one c sharp file. In practice, it is a good idea to have a constants
-        in another file (for separation of concerns).
+        submit one c sharp file. In practice, it is a good idea to have the constants
+        in another file (for separation of concerns), but we are required to submit
+        only one c sharp file.
     */
 
     public static string closingMessage = "You have decided to finish the program early";
